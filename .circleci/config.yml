@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Exibir mensagem de build
+          command: echo "Iniciando o processo de build"
+
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Executar testes
+          command: |
+            echo "Executando testes..."
+            # Adicione aqui seus comandos de teste, por exemplo:
+            # npm test
+            # ou
+            # pytest
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
